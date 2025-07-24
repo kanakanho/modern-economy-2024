@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- MapLibre GL JS -->
+    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://loc8.us/maplibre-gl-vector-text-protocol/dist/maplibre-gl-vector-text-protocol.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+  <script>
+    // VectorTextProtocol.addProtocols(maplibregl);
+
+    maplibregl.addProtocol("topojson", VectorTextProtocol.VectorTextProtocol);
+
+    const map = new maplibregl.Map({
+      container: "map",
+      center: [134.3365984, 33.9029682], // 中心座標
+      maxPitch: 85, // 最大の傾き、デフォルトは60
+      zoom: 16, // ズームレベル
+      style: {
+        version: 8,
+        sources: {
+          // 背景地図 OpenStreetMapのラスタタイル
+          "background-osm-raster": {
+            // ソースの種類。vector、raster、raster-dem、geojson、image、video のいずれか
+            type: "raster",
+            // タイルソースのURL
+            tiles: ["https://tile.openstreetmap.jp/styles/osm-bright-ja/{z}/{x}/{y}.png"],
+            // タイルの解像度。単位はピクセル、デフォルトは512
+            tileSize: 256,
+            // データの帰属
+            attribution:
+              "<a href='https://www.openstreetmap.org/copyright' target='_blank'>© OpenStreetMap contributors</a>",
+          },
+          // kamikatutyou: {
+          //   type: "geojson",
+          //   data: "http://10.14.0.183:55242/36302__4_r.geojson",
+          //   attribution: "<a href='https://www.geospatial.jp/ckan/dataset/aigid-moj-36302'>G空間情報センター</a>",
+          // },
+        },
+        layers: [
+          // 背景地図としてOpenStreetMapのラスタタイルを追加
+          {
+            // 一意のレイヤID
+            id: "background-osm-raster",
+            // レイヤの種類。background、fill、line、symbol、raster、circle、fill-extrusion、heatmap、hillshade のいずれか
+            type: "raster",
+            // データソースの指定
+            source: "background-osm-raster",
+          },
+          // {
+          //   // 一意のレイヤID
+          //   id: "kamikatutyou",
+          //   // レイヤの種類。background、fill、line、symbol、raster、circle、fill-extrusion、heatmap、hillshade のいずれか
+          //   type: "fill",
+          //   // データソースの指定
+          //   source: "kamikatutyou",
+          //   // ソースレイヤの指定
+          //   "source-layer": "kamikatutyou",
+          // },
+        ],
+      },
+    });
+
+    map.on("load", () => {
+      map.addSource("topojson-source", {
+        type: "topojson",
+        data: "https://geoshape.ex.nii.ac.jp/ka/topojson/2020/36/r2ka36302.topojson",
+      });
+
+      map.addLayer({
+        id: "topojson-layer",
+        type: "line",
+        source: "topojson-source",
+      });
+    });
+  </script>
+</html>

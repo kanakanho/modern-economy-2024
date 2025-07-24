@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>14.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E5%AE%9A%E6%9C%9F%E8%A9%A6%E9%A8%93%E5%AF%BE%E7%AD%96">定期試験対策</h1>
+<h2 id="%E7%AC%AC-4-%E5%9B%9E%E5%9F%BA%E7%9B%A4%E7%94%A3%E6%A5%AD%E3%83%BB%E9%9D%9E%E5%9F%BA%E7%9B%A4%E7%94%A3%E6%A5%AD%E8%AB%96%E8%BF%B0">第 4 回：基盤産業・非基盤産業（論述）</h2>
+<blockquote>
+<p>両者の関係を説明できるように</p>
+</blockquote>
+<h3 id="%E5%9F%BA%E7%9B%A4%E7%94%A3%E6%A5%AD">基盤産業</h3>
+<p>域外を主たる販売市場とした産業。一般的に農林漁業、鉱業、製造業、宿泊業、運輸業（特に水運）が該当。大都市では一部のサービス業もあてはまる。</p>
+<h3 id="%E9%9D%9E%E5%9F%BA%E7%9B%A4%E7%94%A3%E6%A5%AD">非基盤産業</h3>
+<p>域内を主たる販売市場としている産業で、建設業、小売業、対個人サービス、公共的サービス、公務、金融保険業（支店、営業所）、不動産業などが該当。</p>
+<h3 id="%E4%B8%A1%E8%80%85%E3%81%AE%E9%96%A2%E4%BF%82">両者の関係</h3>
+<p>基盤産業と非基盤産業の従業者はほぼ比例する</p>
+<h3 id="%E7%B5%8C%E6%B8%88%E5%9F%BA%E7%9B%A4%E8%AA%AC">経済基盤説</h3>
+<p>地域外の市場における需要が地域経済の成長・衰退を規定するという考え方</p>
+<h4 id="%E7%A7%BB%E5%87%BA%E3%83%BB%E8%BC%B8%E5%87%BA%E7%94%A3%E6%A5%AD">移出・輸出産業</h4>
+<p>「移出」：国内他地域への販売</p>
+<p>地域外からの需要に対応した産業</p>
+<p>→<strong>基盤産業になりうる</strong></p>
+<h4 id="%E5%9F%9F%E5%86%85%E7%94%A3%E6%A5%AD">域内産業</h4>
+<p>地域内の住民や域内に立地する企業からの需要に対応した産業</p>
+<p>→<strong>非基盤産業</strong></p>
+<h3 id="%E5%9F%BA%E7%9B%A4%E7%94%A3%E6%A5%AD%E3%81%8C%E9%9D%9E%E5%9F%BA%E7%9B%A4%E7%94%A3%E6%A5%AD%E3%81%AB%E4%B8%8E%E3%81%88%E3%82%8B%E5%BD%B1%E9%9F%BF">基盤産業が非基盤産業に与える影響</h3>
+<ol>
+<li>基盤産業の従業者数を<code>ＬＢ</code>、非基盤産業の従業者数を<code>ＬＮ</code>、地域内の総従業者数を<code>Ｌ</code>とすると<br>
+<code>Ｌ</code> ＝ <code>ＬＢ</code> ＋ <code>ＬＮ</code> （式１） となる</li>
+<li>基盤産業の従業者数<code>ＬＢ</code>は、地域外の市場からの需要に左右されるので、従業者数は外生的（地域内の状況とは独立して）に決まる</li>
+<li>非基盤産業の従業者数<code>ＬＮ</code>は、地域内の需要に左右されるので、地域内の総従業者数<code>Ｌ</code>が多ければ、連動して多くなる</li>
+<li>非基盤産業の従業者数<code>ＬＮ</code>は、地域内の総従業者数<code>Ｌ</code>に対して一定割合 <strong><code>a</code></strong>（<strong><code>a</code></strong> は１より小さく、地域によって異なる）であると仮定すると、非基盤産業の従業者数<code>ＬＮ</code>は、<br>
+<code>ＬＮ</code> ＝ <strong><code>a</code></strong> <code>Ｌ</code> （式２） と表せる</li>
+<li>式２を式１に代入すると<br>
+<code>L</code>＝ <code>LB</code> ＋ <strong><code>a</code></strong> <code>L</code>（式３）</li>
+<li>右辺の <strong><code>a</code></strong> Ｌを左辺に移項すると<br>
+<code>L</code>－ <strong><code>a</code></strong> <code>L</code>＝ <code>LB</code> （式４）</li>
+<li>左辺をＬでくくると<br>
+<code>L</code>（１－<strong><code>a</code></strong> ） ＝ <code>LB</code> （式５）</li>
+<li>両辺を（１－ <strong><code>a</code></strong> ）で割ると<br>
+<code>Ｌ</code>（１－ <strong><code>a</code></strong> ） ÷ （１－ <strong><code>a</code></strong> ） ＝ <code>LB</code> ÷ （１－ <strong><code>a</code></strong> ） （式６）</li>
+<li>地域内の総従業者数Ｌは、<br>
+<code>L</code>＝ １ ÷（１－ <strong><code>a</code></strong> ） × <code>LB</code> （式７） と表せる</li>
+<li>この式から、地域外からの需要が増加したことにより、基盤産業の従業者数が「⊿ ＬＢ人増加した」とすると、地域内の総従業者数が「⊿ Ｌ人増加する」とわかる<br>
+⊿<code>L</code>＝ １ ÷（１－ <strong><code>a</code></strong> ） × ⊿ Ｌ<code>B</code> (式８)</li>
+<li>「１ ÷（１－ <strong><code>a</code></strong> ）」は「経済基盤乗数」と呼ばれる（＞１）</li>
+</ol>
+<p>地域外の市場からの需要が増加した結果、基盤産業の従業者数が「<code>n</code>人増加」したとすると、地域の総従業者数は「<code>n * {１÷（１－ </code><strong><code>a</code></strong><code>）}</code>人増加」することになる（経済基盤乗数の倍数分だけ増加）</p>
+<h3 id="%E5%9F%BA%E7%9B%A4%E7%94%A3%E6%A5%AD%E3%81%A8%E4%BA%BA%E5%8F%A3%E3%81%AE%E9%96%A2%E4%BF%82">基盤産業と人口の関係</h3>
+<p>一般的には、労働者が「主たる家計支持者」（世帯の生計費を主に稼いでいる人）である場合、従業者が地域内に移動してくると、被扶養者である家族も移動してくることが多い</p>
+<p>基盤産業が成長するとその産業の従業者が増える</p>
+<ol>
+<li>地域の総人口を増加させる</li>
+<li>地域内の財・サービス市場が拡大する</li>
+<li>非基盤産業の従業者が増える</li>
+<li>さらなる人口増加を引き起こす</li>
+</ol>
+<p>基盤産業の成長は、地域経済全体に及ぼす影響が大きい<br>
+（衰退も同様［人口減少をもたらす］）</p>
+<h2 id="%E7%AC%AC-4-%E5%9B%9E%E7%89%B9%E5%8C%96%E4%BF%82%E6%95%B0%E8%A8%88%E7%AE%97">第 4 回：特化係数（計算）</h2>
+<pre class="hljs"><code><div>#calc.round((float(city) / float(japan)), digits: 2)
+</div></code></pre>
+<p>特化係数 = 市区町村の構成割合 / 日本全体の構成割合</p>
+<h2 id="%E7%AC%AC-6-%E5%9B%9E%E5%95%86%E5%BA%97%E8%A1%97%E6%B4%BB%E6%80%A7%E5%8C%96%E3%81%AE%E5%8F%96%E3%82%8A%E7%B5%84%E3%81%BF%E8%AB%96%E8%BF%B0">第 6 回：商店街活性化の取り組み（論述）</h2>
+<blockquote>
+<p>まちゼミ、100 円商店街、バルの概要を説明できるように</p>
+</blockquote>
+<h3 id="%E3%81%BE%E3%81%A1%E3%82%BC%E3%83%9F%E5%BE%97%E3%81%99%E3%82%8B%E8%A1%97%E3%81%AE%E3%82%BC%E3%83%9F%E3%83%8A%E3%83%BC%E3%83%AB">まちゼミ（得する街のゼミナール）</h3>
+<p>2003 年 愛知県岡崎市でスタート。店主が講師となり、無料で参加者に専門的な知識・技術・コツ等を伝える少人数制のゼミ（材料等の実費負担あり）。</p>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA">ビデオ</h4>
+<ul>
+<li>
+<p>2003 年開始</p>
+</li>
+<li>
+<p>店主が講師となり、無料で参加者に専門的な知識・技術・コツ等を伝える少人数制のゼミ（材料等の実費負担あり）</p>
+</li>
+<li>
+<p>メリット</p>
+<ul>
+<li>お客さんには満足</li>
+<li>お店には新規顧客と売上</li>
+<li>街に賑わい</li>
+</ul>
+</li>
+<li>
+<p>原則無料</p>
+</li>
+<li>
+<p>講座中は販売を行わない</p>
+</li>
+<li>
+<p>チラシから興味のあるゼミを見つけて、電話で予約</p>
+</li>
+<li>
+<p>お客さんに新しい体験を</p>
+</li>
+<li>
+<p>お店に新しい顧客を</p>
+</li>
+</ul>
+<h3 id="%EF%BC%91%EF%BC%90%EF%BC%90%E5%86%86%E5%95%86%E5%BA%97%E8%A1%97">１００円商店街</h3>
+<p>2004 年 山形県新庄市でスタート。商店街を１つの 100 円ショップに見立て、参加店舗が 100 円商品を店頭に並べる。</p>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA-1">ビデオ 1</h4>
+<ul>
+<li>
+<p>山形県新庄市でスタート</p>
+</li>
+<li>
+<p>商店街活性化事業</p>
+</li>
+<li>
+<p>お店に足を運ぶ</p>
+<ul>
+<li>魅力を見つけ、リピーターに</li>
+</ul>
+</li>
+<li>
+<p>関西では最初、奈良県生駒市でスタート</p>
+</li>
+<li>
+<p>地域の商業組織が一丸となって取り組む</p>
+</li>
+<li>
+<p>各店穂が 100 円商品を選ぶ</p>
+</li>
+<li>
+<p>お店に関係がなくてもよい</p>
+</li>
+<li>
+<p>チラシ・ポスターで PR</p>
+</li>
+<li>
+<p>のぼりなどで一体感を出す</p>
+</li>
+<li>
+<p>新規顧客獲得の機会</p>
+</li>
+<li>
+<p>決まり</p>
+<ul>
+<li>店頭に 100 円商品を並べる</li>
+<li>きちんと接客
+<ul>
+<li>お客さんに直に触れ合う</li>
+</ul>
+</li>
+<li>店内で精算する
+<ul>
+<li>店内の良さを見てもらう</li>
+<li>他の商品もついでに買ってもらえる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>1 つでも多くのお店で開催して、盛り上げるのが大事</p>
+</li>
+</ul>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA-2">ビデオ 2</h4>
+<ul>
+<li>
+<p>魅力的な 100 円商品</p>
+<ul>
+<li>通常より安く、100 円にする
+<ul>
+<li>サイズや量を調節する</li>
+</ul>
+</li>
+<li>100 円で売る商品がない場合
+<ul>
+<li>別に 100 円商品を用意する</li>
+<li>お客さんが喜ぶ。嬉しいものを並べる</li>
+<li>出展するお店を増やすのが大事</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>接客して商品を売る</p>
+</li>
+<li>
+<p>商品の精算はお店の中でする</p>
+</li>
+<li>
+<p>次回の来店で使えるクーポンなどを用意して次の機会に繋げる</p>
+</li>
+<li>
+<p>のぼり、横断幕、ポップ、はっぴなどで盛り上げる</p>
+</li>
+<li>
+<p>100 円商品について告知したチラシ、ポスターを用意して PR</p>
+</li>
+<li>
+<p>コストを抑えて、お客さんを呼べて、満足感のあるイベントにできるとなおよい</p>
+</li>
+<li>
+<p>お客さんに楽しんで喜んでもらえる</p>
+</li>
+</ul>
+<h3 id="%E3%83%90%E3%83%AB%E8%A1%97%E3%83%90%E3%83%AB">バル（街バル）</h3>
+<p>2004 年 北海道函館市でスタート。５枚綴りのチケットを販売。参加店舗のメニュー（ドリンク１杯＆フード）が記載された地図を手に、好きなお店を５つ選び、はしご体験。各店の料金はチケット１枚だけ。スタンプ形式の場合もあり。</p>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA">ビデオ</h4>
+<ul>
+<li>
+<p>2004 年　函館でスタート</p>
+</li>
+<li>
+<p>お店の「ハシゴ」食べ歩き、飲み歩きをしてもらうイベント</p>
+</li>
+<li>
+<p>手順</p>
+<ul>
+<li>バルのチケット（５枚綴り）を販売（前売り）</li>
+<li>各店のメニューを紹介したチラシから、目的のお店を探す</li>
+<li>チケット 1 枚で料理とドリンクが楽しめる（x5 軒）</li>
+</ul>
+</li>
+<li>
+<p>お客さんは馴染みのないお店に行ける</p>
+</li>
+<li>
+<p>お店は新規顧客を獲得できる</p>
+</li>
+<li>
+<p>チケットが余った場合は、あとバルとして、チケットを金券として扱える</p>
+</li>
+<li>
+<p>魅力</p>
+<ul>
+<li>当日だけでなく、リピーターでそのあとも盛り上がる</li>
+<li>チラシの Map でお店を知ってもらうきっかけになる</li>
+</ul>
+</li>
+</ul>
+<h3 id="%E5%8F%96%E3%82%8A%E7%B5%84%E3%81%BF%E3%81%AE%E5%85%B1%E9%80%9A%E7%82%B9">取り組みの共通点</h3>
+<ul>
+<li>主たる目的は「新規顧客の獲得」（× 来街、◎ 来店）
+<ul>
+<li>普段入りにくいお店を入りやすくして、お客様にお店の魅力を伝え、ファンをつくる</li>
+</ul>
+</li>
+<li>この取組の中で儲けようとしていない
+<ul>
+<li>お店のファンができれば売上・利益は後からついてくる</li>
+</ul>
+</li>
+<li>それほど多くのお金を必要としない
+<ul>
+<li>従来の商店街イベントでは、会場費、設営費などが高額に</li>
+<li>個店は少額の負担で単独では不可能な集客が可能に</li>
+<li>お金は必要なくても手間はかかることがある</li>
+</ul>
+</li>
+<li>「まち」にプラスの効果が生まれる
+<ul>
+<li>役員だけでなく、若手の店主間にもつながり（連帯感）が生まれ、地域コミュニティの活性化・再生に寄与する</li>
+<li>まちに人が回遊する（商店街の外にも波及あり？）</li>
+</ul>
+</li>
+</ul>
+<h2 id="%E7%AC%AC-8-%E5%9B%9E%E5%9C%B0%E5%9F%9F%E7%B5%8C%E6%B8%88%E3%83%BB%E7%94%A3%E6%A5%AD%E6%B4%BB%E6%80%A7%E5%8C%96%E3%81%AE%E5%8F%96%E7%B5%84%E8%AB%96%E8%BF%B0">第 8 回:地域経済・産業活性化の取組（論述）</h2>
+<blockquote>
+<p>6 つの事例の概要を説明できるように</p>
+</blockquote>
+<h3 id="%E5%BE%B3%E5%B3%B6%E7%9C%8C%E4%B8%8A%E5%8B%9D%E7%94%BA-%E8%91%89%E3%81%A3%E3%81%B1%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9">徳島県上勝町 「葉っぱビジネス」</h3>
+<h4 id="%EF%BC%9C%E5%A0%B4%E6%89%80%E7%AD%89%EF%BC%9E">＜場所等＞</h4>
+<ul>
+<li>徳島県勝浦郡上勝町</li>
+<li>人口 1,380 名（2020 年 10 月 1 日現在）、老年人口比率 57.9％<br>
+⇒ 過疎化と高齢化が進む町</li>
+</ul>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E4%B8%BB%E4%BD%93%EF%BC%9E">＜事業主体＞</h4>
+<ul>
+<li>株式会社いろどり
+https://www.irodori.co.jp/</li>
+</ul>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E5%86%85%E5%AE%B9%E7%AD%89%EF%BC%9E">＜事業内容等＞</h4>
+<ul>
+<li>町内の至る所にある山の季節の葉、花、山菜等を和食の飾り「つまもの」として料亭などに販売</li>
+<li>1986 年、当時農協職員だった横石知二氏（現・代表取締役社長）が取組に「彩（いろどり）」と名づけてスタート</li>
+<li>「つまもの」の種類は 300 以上あり、一年を通して様々な葉っぱを出荷</li>
+<li>商品が軽量で、高齢の女性を中心とする約１５０軒の農家が取り組む</li>
+<li>株式会社いろどりが「上勝情報ネットワーク」を通じて受注などの情報を農家へ発信</li>
+<li>農家はパソコンやタブレット端末で受注情報を見て、出荷できる「つまもの」を入力（早い者勝ち）</li>
+<li>年商は約 2 億円（年間売上が 1000 万円を超える農家も）</li>
+<li>各農家の売上順位が分かるシステムになっており、農家のやる気を刺激</li>
+<li>高齢農家は、年金に加えて所得が得られるようになっただけでなく、畑や山を動き回ることで足腰が強くなり、健康維持、寝たきり予防、認知症予防にもつながった</li>
+<li>代表の横石氏は、農協や料亭などを巡り、流通ルートや顧客の開拓に励み、ニーズを掴み、売り先を広げて、ビジネスを発展させてきた</li>
+</ul>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA-1">ビデオ 1</h4>
+<ul>
+<li>
+<p>はっぱを販売するビジネス</p>
+</li>
+<li>
+<p>つまものとして和食の飾りに</p>
+</li>
+<li>
+<p>彩</p>
+</li>
+<li>
+<p>注文が入ると、それぞれの農家の持つ端末（タブレット）に連絡</p>
+</li>
+<li>
+<p>売上順位が見えて、他の人と競争できる</p>
+</li>
+</ul>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA-2">ビデオ 2</h4>
+<ul>
+<li>足元にある資源を見つける</li>
+<li>プロデューサー（横山）の存在
+<ul>
+<li>他の人を導いていく存在</li>
+</ul>
+</li>
+</ul>
+<h3 id="%E5%B2%A1%E5%B1%B1%E7%9C%8C%E8%A5%BF%E7%B2%9F%E5%80%89%E6%9D%91-%E6%A3%AE%E3%81%AE%E5%AD%A6%E6%A0%A1">岡山県西粟倉村 「森の学校」</h3>
+<h4 id="%EF%BC%9C%E5%A0%B4%E6%89%80%E7%AD%89%EF%BC%9E">＜場所等＞</h4>
+<ul>
+<li>岡山県英田郡西粟倉村</li>
+<li>人口 1,398 名（2020 年 10 月 1 日現在）、老年人口比率 35.4％<br>
+⇒ 過疎化と高齢化が進む町</li>
+</ul>
+<h4 id="%EF%BC%9C%E5%8F%96%E7%B5%84%E3%81%AE%E7%B5%8C%E7%B7%AF%EF%BC%9E">＜取組の経緯＞</h4>
+<ul>
+<li>村の 95％は森林で、そのうち 84％が人工林</li>
+<li>高度成長期に、将来の子どもや孫のために一斉に植えられた杉・檜は、その後、林業が衰退し、過疎化が進むなかで間伐が行われなくなった</li>
+<li>2008 年、村役場を中心として、この森林を立派な「百年の森林」に育て上げていく取組がスタート</li>
+<li>森の再生を通じた地域経済の活性化を目的として、2009 年 10 月、地域の資源を価値にする企業が設立された</li>
+</ul>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E4%B8%BB%E4%BD%93%EF%BC%9E">＜事業主体＞</h4>
+<ul>
+<li>株式会社エーゼログループ 西粟倉森の学校<br>
+https://morinogakko.jp/</li>
+</ul>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E5%86%85%E5%AE%B9%E7%AD%89%EF%BC%9E">＜事業内容等＞</h4>
+<ul>
+<li>2010 年 10 月、人工林の間伐材の加工工場を設立し、原木の調達から製材、乾燥、加工、販売までの機能を担う</li>
+<li>個人向け DIY 製品の開発や販売、住宅用の内装材や大型建築物の材料の供給などを行う</li>
+<li>従業員数（木材事業部） 22 名（2023 年 4 月現在、HP より）</li>
+<li>2022 年 3 月、可能性発掘基地をテーマにした複合施設「BASE101% NISHIAWAKURA」を OPEN
+<ul>
+<li>ジビエや産直野菜たっぷりのランチを提供するレストラン</li>
+<li>自社栽培いちご、特産品を生かしたスイーツを提供するカフェ</li>
+<li>5 種類の完熟いちごを食べ比べできるいちご摘み体験</li>
+<li>DIY 用アウトレット木材販売やオリジナル製品の展示販売</li>
+<li>村のクラフト作家や独自セレクトした商品の販売</li>
+</ul>
+</li>
+</ul>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA-1">ビデオ 1</h4>
+<ul>
+<li>村の 93% が森林
+<ul>
+<li>84%が昭和 30 年台に植えられた人工林</li>
+</ul>
+</li>
+<li>管理されなくなった森を村で買取、管理する</li>
+<li>林業が廃れていたが、行政と民間が協力して、持続可能な形に再生</li>
+<li>行政と民間の連携
+<ul>
+<li>村の中のベンチャー企業が森の管理を行う</li>
+<li>34 社のベンチャー、180 人の雇用</li>
+</ul>
+</li>
+</ul>
+<p>森の学校</p>
+<ul>
+<li>木材の加工をして、出荷を行う企業</li>
+<li>加工によって付加価値を与える</li>
+</ul>
+<h3 id="%E5%85%B5%E5%BA%AB%E7%9C%8C%E4%B8%B9%E6%B3%A2%E7%AF%A0%E5%B1%B1%E5%B8%82-%E7%AF%A0%E5%B1%B1%E5%9F%8E%E4%B8%8B%E7%94%BA%E3%83%9B%E3%83%86%E3%83%AB-nipponia">兵庫県丹波篠山市 「篠山城下町ホテル NIPPONIA」</h3>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E4%B8%BB%E4%BD%93%EF%BC%9E">＜事業主体＞</h4>
+<ul>
+<li>一般社団法人ノオト、株式会社 NOTE<br>
+https://nipponia.or.jp/</li>
+</ul>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E5%86%85%E5%AE%B9%E7%AD%89%EF%BC%9E">＜事業内容等＞</h4>
+<ul>
+<li>篠山城下町全体を「ひとつのホテル」に見立て、点在している築 100 年超の古民家の空家を、歴史性を尊重しながら客室・飲食店・店舗として再生し、篠山の文化や歴史を実感できる宿泊施設として、2015 年 10 月にオープン</li>
+<li>地域の豊かな食材を使った創作フレンチ、既存の歴史施設・飲食店・店舗などと連携した歴史的城下町のまち歩きなど、「歴史あるまちに、とけこむように泊まる」ことをコンセプトとして、まち全体の利益が向上することを目指す</li>
+<li>他地域にも展開中（32 地域 166 棟 227 室［2024 年 6 月現在］）</li>
+</ul>
+<p><img src="文書名現代の経済 06 地域資源活用.svg" alt=""></p>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA">ビデオ</h4>
+<ul>
+<li>古民家再生</li>
+<li>当時の息遣いの残る家</li>
+</ul>
+<h3 id="%E5%A4%A7%E9%98%AA%E5%BA%9C%E6%9D%B1%E5%A4%A7%E9%98%AA%E5%B8%82-sekai-hotel">大阪府東大阪市 「SEKAI HOTEL」</h3>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E4%B8%BB%E4%BD%93%EF%BC%9E">＜事業主体＞</h4>
+<ul>
+<li>SEKAI HOTEL 株式会社<br>
+https://www.sekaihotel.jp/</li>
+</ul>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E5%86%85%E5%AE%B9%E7%AD%89%EF%BC%9E">＜事業内容等＞</h4>
+<ul>
+<li>大阪市此花区西九条にある老朽空家をリノベーションして宿泊施設として 2017 年 6 月にオープン</li>
+<li>フロントや客室、飲食、大浴場などの機能をまち全体に分散させた”まちごとホテル”として運営</li>
+<li>宿泊施設は、大阪市此花区西九条に１３軒（現在、操業自粛中）、東大阪市布施に７軒、富山県高岡市に１軒</li>
+<li>外国人観光客が求めている日本人の Ordinary（日常）を体感できる場を提供（西九条エリア）</li>
+<li>近隣にある喫茶店での朝食や銭湯の利用券をサービス（近隣店舗の活性化にも貢献）</li>
+</ul>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA">ビデオ</h4>
+<ul>
+<li>シャッター商店街をホテルで活性化</li>
+<li>商店街をまるごとホテルに
+<ul>
+<li>空き店舗を改築</li>
+</ul>
+</li>
+<li>ホテルの機能が街に分散
+<ul>
+<li>飲食や銭湯など、それぞれの場所でお金を落とす</li>
+<li>まち全体の活性化</li>
+</ul>
+</li>
+<li>ホテルも街に溶け込む</li>
+</ul>
+<h3 id="%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%80%89%E6%95%B7%E5%B8%82-%E5%85%90%E5%B3%B6%E3%82%B8%E3%83%BC%E3%83%B3%E3%82%BA%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%88">岡山県倉敷市 「児島ジーンズストリート」</h3>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E4%B8%BB%E4%BD%93%EF%BC%9E">＜事業主体＞</h4>
+<ul>
+<li>児島ジーンズストリート協同組合<br>
+http://jeans-street.com/</li>
+</ul>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E5%86%85%E5%AE%B9%E7%AD%89%EF%BC%9E">＜事業内容等＞</h4>
+<ul>
+<li>児島地区は、明治時代から「繊維の町」として知られ、1960 年代に国内で最初にジーンズ生産を手掛けたことで有名</li>
+<li>ジーンズの生産地であるが、ジーンズを購入できる店や観光できる場所がなかったため、2009 年に「児嶋ジーンズストリート構想」を策定</li>
+<li>地元メーカーや児島商工会議所等で構成する協議会（後に協同組合）は、児島地区でかつて最も栄えていた味野商店街内の空き店舗に、ジーンズ関連などの 30 店舗以上を誘致し、「日本のジーンズの聖地」として売り出した</li>
+</ul>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA">ビデオ</h4>
+<ul>
+<li>シャッター街となった商店街の再生</li>
+<li>駅やバス、看板などの街に一体化する形でジーンズを売り出し、ブランド化</li>
+</ul>
+<h3 id="%E5%85%B5%E5%BA%AB%E7%9C%8C%E8%B1%8A%E5%B2%A1%E5%B8%82-%E3%82%AB%E3%83%90%E3%83%B3%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%88">兵庫県豊岡市 「カバンストリート」</h3>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E4%B8%BB%E4%BD%93%EF%BC%9E">＜事業主体＞</h4>
+<ul>
+<li>鞄産業と宵田商店街<br>
+https://www.cabanst.com/</li>
+</ul>
+<h4 id="%EF%BC%9C%E4%BA%8B%E6%A5%AD%E5%86%85%E5%AE%B9%E7%AD%89%EF%BC%9E">＜事業内容等＞</h4>
+<ul>
+<li>兵庫県豊岡市は、市内に 180 社以上の鞄関連の企業が立地し、国産鞄の約 7 割を製造する国内最大の生産地</li>
+<li>2005 年 3 月、地場産業と商店街の活性化を目的として、鞄産業と宵田商店街が協力して「カバンストリート」が誕生</li>
+<li>約 30 店舗が軒を連ね（うち 16 店舗が鞄関連［新規出店もあり］）、豊岡の観光スポットの一つとなっている</li>
+<li>2013 年 4 月、鞄に特化した拠点施設「Toyooka KABANArtisan Avenue」がオープン</li>
+<li>この施設内にある鞄の専門校では、1 年間で、1 枚のラフスケッチから一人で 1 本の鞄を製造できる職人を養成</li>
+</ul>
+<h4 id="%E3%83%93%E3%83%87%E3%82%AA">ビデオ</h4>
+<ul>
+<li>カバンの生産高日本 1</li>
+<li>たくさんのカバン屋さんが並ぶ商店街</li>
+<li>地域全体で職人の育成する姿勢と学校</li>
+</ul>
+
+</body>
+</html>

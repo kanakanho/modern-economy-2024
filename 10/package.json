@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "marp -s .",
+    "marp": "marp index.md --html",
+    "pdf": "marp index.md --pdf --theme-set --allow-local-files --pdf-outlines"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.0.3"
+  }
+}
